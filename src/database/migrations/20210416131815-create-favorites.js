@@ -3,35 +3,27 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
 
-    await queryInterface.createTable('users', {
+    await queryInterface.createTable('favorites', {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true,
         allowNull: false
       },
-      name: {
+      user_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: { model: 'users', key: 'id' },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
+      },
+      marvel_type: {
         type: Sequelize.STRING,
         allowNull: false
       },
-      email: {
+      marvel_id: {
         type: Sequelize.STRING,
         allowNull: false
-      },
-      password: {
-        type: Sequelize.STRING,
-        allowNull: false
-      },
-      cpf: {
-        type: Sequelize.STRING,
-        allowNull: false
-      },
-      birthDate: {
-        type: Sequelize.DATE,
-        allowNull: false
-      },
-      profileImg: {
-        type: Sequelize.STRING,
       },
       created_at: {
         type: Sequelize.DATE,
@@ -47,7 +39,7 @@ module.exports = {
 
   down: async (queryInterface, Sequelize) => {
 
-    await queryInterface.dropTable('users');
+    await queryInterface.dropTable('favorites');
 
   }
 };
