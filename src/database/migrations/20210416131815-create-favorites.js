@@ -19,6 +19,7 @@ module.exports = {
       },
       marvel_type: {
         type: Sequelize.STRING,
+        lowercase: true,
         allowNull: false
       },
       marvel_id: {

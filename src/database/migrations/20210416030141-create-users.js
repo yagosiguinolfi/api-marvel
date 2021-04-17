@@ -16,21 +16,24 @@ module.exports = {
       },
       email: {
         type: Sequelize.STRING,
+        unique: true,
+        lowercase: true,
         allowNull: false
       },
       password: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
+        select: false
       },
       cpf: {
         type: Sequelize.STRING,
         allowNull: false
       },
-      birthDate: {
+      birth_date: {
         type: Sequelize.DATE,
         allowNull: false
       },
-      profileImg: {
+      profile_img: {
         type: Sequelize.STRING,
       },
       created_at: {
