@@ -42,6 +42,26 @@ module.exports = {
 
   },
 
+
+  async updateUser(req, res) {
+    const { id, name, email, password, cpf, birth_date, profile_img } = req.body;
+
+    const password_hash = await bcrypt.hash(password, 10);
+    try {
+
+      const user = await User.update( { name, email, password: password_hash, cpf, birth_date, profile_img } , { where: { id, email }});
+
+      user.password = undefined;
+      return res.json({
+        user,
+        token: generateToken({ id: user.id })
+      });
+    } catch (error) {
+      return res.status(400).json({ error: 'Update failed' });
+    }
+
+  },
+
   async authenticate(req, res) {
     const { email, password } = req.body;
 

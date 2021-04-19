@@ -16,5 +16,18 @@ module.exports= {
 
     return res.json(favorite);
 
+  },
+
+  async delete(req, res){
+    const { id } = req.body;
+
+    const favorite = await Favorite.destroy({
+      where: {
+        id
+      }
+    });
+
+    return res.json(favorite);
+
   }
 };
