@@ -19,6 +19,15 @@ module.exports = {
     return res.json(users);
   },
 
+  async indexOne(req, res) {
+    const { id } = req.body;
+
+    const user = await User.findOne({ where: { id }});
+
+     user.password = undefined;
+
+    return res.json(user);
+  },
 
   async store(req, res) {
     const { name, email, password, cpf, birth_date, profile_img } = req.body;
